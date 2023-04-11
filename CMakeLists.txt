@@ -12,6 +12,7 @@ set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+
 ## Set up variables
 set(WELKARN_SOURCE_FILES "src/core/Color.cpp" "src/geometry/Rectangle.cpp")
 set(WELKARN_TEST_FILES "tests/core/ColorTest.cpp" "tests/geometry/RectangleTest.cpp")
@@ -48,6 +49,8 @@ endif()
 ## Link in the object files with the main executable
 add_executable(Welkarn src/Main.cpp)
 target_link_libraries(Welkarn PUBLIC WelkarnObjects)
+
+
 
 
 
