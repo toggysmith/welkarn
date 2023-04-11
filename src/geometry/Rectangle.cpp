@@ -1,5 +1,10 @@
 #include "geometry/Rectangle.hpp"
 
+/**
+ * @brief Construct a new Rectangle object
+ *
+ * @param width The width of the rectangle.
+ */
 Rectangle::Rectangle(Color color, int width, int height) : color(color), width(width), height(height) {}
 
 Color Rectangle::getColor() const

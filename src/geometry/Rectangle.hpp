@@ -11,6 +11,10 @@ class Rectangle
 		Color color;
 
 	public:
+		/**
+		 * @brief Constructretret
+		 *
+		 */
 		Rectangle(Color, int, int);
 
 		Color getColor() const;

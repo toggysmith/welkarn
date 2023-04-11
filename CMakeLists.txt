@@ -12,7 +12,6 @@ set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-
 ## Set up variables
 set(WELKARN_SOURCE_FILES "src/core/Color.cpp" "src/geometry/Rectangle.cpp")
 set(WELKARN_TEST_FILES "tests/core/ColorTest.cpp" "tests/geometry/RectangleTest.cpp")
@@ -25,9 +24,15 @@ set(WELKARN_TEST_FILES "tests/core/ColorTest.cpp" "tests/geometry/RectangleTest.
 add_library(WelkarnObjects OBJECT ${WELKARN_SOURCE_FILES})
 target_include_directories(WelkarnObjects PUBLIC src)
 
+## Set up coverage
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake/modules)
+include(CodeCoverage)
+add_code_coverage()
+
 ## Add fmt library
 add_subdirectory(external/fmt-9.1.0)
 target_link_libraries(WelkarnObjects fmt)
+target_code_coverage(WelkarnObjects)
 
 
 
@@ -52,12 +57,12 @@ target_link_libraries(Welkarn PUBLIC WelkarnObjects)
 
 
 
+# Handle testing
 
-
-# Create the test runner executable
+## Create the test runner executable
 add_executable(WelkarnTester ${WELKARN_TEST_FILES})
 
-# Add Google Test library
+## Add Google Test library
 enable_testing()
 
 include(FetchContent)
@@ -69,6 +74,7 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
 target_link_libraries(WelkarnTester PUBLIC WelkarnObjects GTest::gtest_main)
+target_code_coverage(WelkarnTester EXCLUDE build/* tests/*)
 
 include(GoogleTest)
 gtest_discover_tests(WelkarnTester)
