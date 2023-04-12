@@ -1,9 +1,9 @@
-<h1 align="center">Welkran</h1>
+<h1 align="center">Welkarn</h1>
 <p align="center">Modern C++ project template using Docker, CMake, Doxygen, Clang Format, Google Test, and LLVM Sanitizers.</p>
 
 # Overview
 
-Welkran, a modern C++ project template, is not designed to be the best template available on the Internet. Instead, it is a personal project that I am developing to educate myself about the C++ ecosystem and to create a template that I can use for my own personal projects. While I have taken care to make it useful and functional, it is not intended to be a one-size-fits-all solution for all C++ projects. Rather, it serves as a starting point for anyone who wants to create a new C++ project and needs a basic template to get started. As with any open-source project, Welkran is a work in progress, and I am constantly improving it based on feedback from the community and my own learning experiences.
+Welkarn, a modern C++ project template, is not designed to be the best template available on the Internet. Instead, it is a personal project that I am developing to educate myself about the C++ ecosystem and to create a template that I can use for my own personal projects. While I have taken care to make it useful and functional, it is not intended to be a one-size-fits-all solution for all C++ projects. Rather, it serves as a starting point for anyone who wants to create a new C++ project and needs a basic template to get started. As with any open-source project, Welkarn is a work in progress, and I am constantly improving it based on feedback from the community and my own learning experiences.
 
 # Generating Documentation
 
@@ -15,7 +15,7 @@ To start with, download [Docker](https://www.docker.com/products/docker-desktop/
 
 Inside the Docker container, run the command `cmake -S . -B build && cmake --build build` to build the project.
 
-To run Welkran, go into the build directory via `cd build` and use the command `./Welkran`.
+To run Welkarn, go into the build directory via `cd build` and use the command `./Welkarn`.
 
 # Running Tests
 
