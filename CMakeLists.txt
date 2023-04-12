@@ -27,7 +27,6 @@ target_include_directories(WelkarnObjects PUBLIC src)
 ## Set up coverage
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake/modules)
 include(CodeCoverage)
-add_code_coverage()
 
 ## Add fmt library
 add_subdirectory(external/fmt-9.1.0)
