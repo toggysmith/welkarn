@@ -13,16 +13,16 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 ## Set up variables
-set(WELKARN_SOURCE_FILES "src/core/Color.cpp" "src/geometry/Rectangle.cpp")
-set(WELKARN_TEST_FILES "tests/core/ColorTest.cpp" "tests/geometry/RectangleTest.cpp")
+set(SRC_FILES "src/core/Color.cpp" "src/geometry/Rectangle.cpp")
+set(TEST_FILES "tests/core/ColorTest.cpp" "tests/geometry/RectangleTest.cpp")
 
 
 
 # Create bundle of object files with necessary libraries
 
 ## Create object files and include headers
-add_library(WelkarnObjects OBJECT ${WELKARN_SOURCE_FILES})
-target_include_directories(WelkarnObjects PUBLIC src)
+add_library(${PROJECT_NAME}Objects OBJECT ${SRC_FILES})
+target_include_directories(${PROJECT_NAME}Objects PUBLIC src)
 
 ## Set up coverage
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake/modules)
@@ -30,8 +30,8 @@ include(CodeCoverage)
 
 ## Add fmt library
 add_subdirectory(external/fmt-9.1.0)
-target_link_libraries(WelkarnObjects fmt)
-target_code_coverage(WelkarnObjects)
+target_link_libraries(${PROJECT_NAME}Objects fmt)
+target_code_coverage(${PROJECT_NAME}Objects)
 
 
 
@@ -51,15 +51,15 @@ elseif (USE_SANITIZER STREQUAL "Memory")
 endif()
 
 ## Link in the object files with the main executable
-add_executable(Welkarn src/Main.cpp)
-target_link_libraries(Welkarn PUBLIC WelkarnObjects)
+add_executable(${PROJECT_NAME} src/Main.cpp)
+target_link_libraries(${PROJECT_NAME} PUBLIC ${PROJECT_NAME}Objects)
 
 
 
 # Handle testing
 
 ## Create the test runner executable
-add_executable(WelkarnTester ${WELKARN_TEST_FILES})
+add_executable(${PROJECT_NAME}Tester ${TEST_FILES})
 
 ## Add Google Test library
 enable_testing()
@@ -72,8 +72,8 @@ FetchContent_Declare(
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
-target_link_libraries(WelkarnTester PUBLIC WelkarnObjects GTest::gtest_main)
-target_code_coverage(WelkarnTester EXCLUDE build/* tests/*)
+target_link_libraries(${PROJECT_NAME}Tester PUBLIC ${PROJECT_NAME}Objects GTest::gtest_main)
+target_code_coverage(${PROJECT_NAME}Tester EXCLUDE build/* tests/*)
 
 include(GoogleTest)
-gtest_discover_tests(WelkarnTester)
+gtest_discover_tests(${PROJECT_NAME}Tester)
