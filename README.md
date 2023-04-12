@@ -22,3 +22,23 @@ To run Welkarn, go into the build directory via `cd build` and use the command `
 Welkarn uses Google Test for simple unit tests. The easiest way to run the tests is inside the Docker container. Follow the instructions for building to build the project and start a Docker container.
 
 Once inside the Docker container, go into the build directory via `cd build` and run either `ctest` or `./WelkarnTester`.
+
+# Checking Test Coverage
+
+To check coverage, go inside the Docker container and enter the build directory via `cd build`.
+
+Then run `make ccov-WelkarnTester`. A HTML version of the coverage report should be generated inside the ccov directory.
+
+If you want to open this coverage outside of the Docker container, you can copy the ccov directory from the Docker
+container to your machine. To do this, you first need to get the ID of the Docker container. When you have been running
+commands previously, you should have seen that the user was `root@[ID]`, e.g. `root@879a4b6eba95`. Keep a note of the
+ID value.
+
+Ensure the Docker container is still running inside one terminal instance and then open a new terminal instance. In the new
+terminal instance, run the command `docker cp [ID]:/app/build/ccov [DIR]/ccov` where DIR is the directory on your machine you
+want to copy the ccov directory to.
+
+You can then open up the index.html file in the ccov/WelkarnTester directory to see the coverage report.
+
+![image](https://user-images.githubusercontent.com/61121030/231470401-1acd8660-5c89-4695-9258-663441612ca6.png)
+*An example of a generated coverage report.*
